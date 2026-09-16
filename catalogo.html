@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Produtos</title>
+
+    <style>
+        .divCatalogo {
+            display: grid;
+            gap: 20px 15px;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 20px;
+            
+        }
+
+        .cardProduto {
+            background-color: yellowgreen;
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 5px 4px 10px 3px rgba(138,131,131,0.63);
+        }
+
+        .cardProduto img {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+            background-color: greenyellow;
+        }
+
+        .cardInfo {
+            padding: 15px;
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        h3 {
+            text-align: left;
+            font-size: 30px;
+            color: yellowgreen;
+            margin: 0%;
+        }
+
+        .container-busca {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 500px;
+        margin: 0 auto;
+        }
+
+        input  {
+
+            width: 400px;;
+        }
+    
+
+    </style>
+
+</head>
+<body>
+    
+    <h3>HORTIFRUTI ​​​🍉​​</h3>
+
+       <div class="container-busca"><input type="text" 
+        id="idbusca" 
+        placeholder="Digite a fruta,preço ou tipo...">
+      
+       </div>
+
+    <div class="divCatalogo" id="divCatalogo"></div>
+ 
+
+
+    <script>
+        const catalogoProdutos = [
+    
+            ['Banana', 'Banana Prata', 'R$ 5,99', 'https://vallefrutas.com.br/_astro/Banana-Prata-1.KqVABvKC.png'],
+            ['Maçã', 'Maçã Gala', 'R$ 4,99', 'https://png.pngtree.com/png-vector/20230928/ourmid/pngtree-gala-apples-isolated-png-image_10124519.png'],
+            ['Laranja', 'Laranja Lima', 'R$ 4,99', 'https://png.pngtree.com/png-vector/20250805/ourmid/pngtree-fresh-orange-with-leaves-and-slices-png-image_16840772.webp'],
+            ['Manga', 'Manga Palmer', 'R$ 5,99', 'https://png.pngtree.com/png-vector/20241221/ourmid/pngtree-ripe-mango-on-transparent-background-png-image_14848777.png'],
+            ['Goiaba', 'Goiaba Branca', 'R$ 4,99', 'https://verduraohortifruti.com.br/wp-content/uploads/2025/07/Goiaba-branca-300x300.png'],
+            ['Limão', 'Limão Siciliano', 'R$ 3,99', 'https://png.pngtree.com/png-vector/20250312/ourmid/pngtree-green-lemon-png-image_15759038.png'],
+            ['Mamão', 'Mamão Papaia', 'R$ 5,99', 'https://png.pngtree.com/png-vector/20240805/ourmid/pngtree-fresh-papaya--white-background--isolated--professi-png-image_13391813.png']
+        ];
+
+        const divCatalogo = document.getElementById('divCatalogo'); 
+
+function pesquisar() {
+    const busca = document.getElementById('idbusca').value;
+
+    divCatalogo.innerHTML = '';
+
+    catalogoProdutos.forEach((produto) => {
+
+        if (
+            
+     produto[0].toLowerCase().includes(busca.toLowerCase()) ||
+     produto[1].toLowerCase().includes(busca.toLowerCase()) ||
+     produto[2].toLowerCase().includes(busca.toLowerCase())) {
+            
+            const card = document.createElement('div');
+            card.className = 'cardProduto';
+
+            card.innerHTML = `
+                <img src="${produto[3]}" alt="${produto[0]}">
+                <div class="cardInfo">
+                    <strong>${produto[0]}</strong><br>
+                    ${produto[1]}<br>
+                    <strong>${produto[2]}</strong>
+                </div>
+            `;
+
+            divCatalogo.append(card);
+        }
+    });
+}
+        document.getElementById('idbusca')
+        .addEventListener('input',pesquisar);
+
+        pesquisar();
+    </script>
+
+</body>
+</html>
